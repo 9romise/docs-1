@@ -37,7 +37,7 @@ When initializing the language server, the list of services to use is passed as 
 import {
   createConnection,
   createServer,
-  createSimpleProjectProviderFactory,
+  createSimpleProject,
 } from "@volar/language-server/node";
 import { service } from "./service";
 
@@ -46,13 +46,12 @@ const server = createServer(connection);
 
 connection.listen();
 
+function getLanguageServicePlugins() {
+	return [service]
+}
+
 connection.onInitialize((params) => {
-  return server.initialize(params, createSimpleProjectProviderFactory(), {
-    // ...
-    getServicePlugins() {
-      return [service];
-    },
-  });
+  return server.initialize(params, createSimpleProject(), getLanguageServicePlugins());
 });
 
 connection.onInitialized(() => {
