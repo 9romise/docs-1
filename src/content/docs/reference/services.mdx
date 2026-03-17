@@ -18,7 +18,7 @@ These methods are called by the Volar language server when it needs to perform a
 ```ts title="service.ts"
 export const service = {
 	name: 'my-service', // The name of the service, this is used to identify the service in the logs and in Volar Labs
-	create(context): ServicePluginInstance {
+	create(context): LanguageServicePluginInstance {
 		return {
 			provideHover(document, position, token) {
 				// Implement hover support here
@@ -26,7 +26,7 @@ export const service = {
 			// More methods...
 		};
 	},
-} satisfies ServicePlugin;
+} satisfies LanguageServicePlugin;
 ```
 
 ## Using a service
@@ -78,7 +78,7 @@ import { CompletionItemKind } from '@volar/language-server';
 
 export const service = {
 	name: 'my-service',
-	create(context): ServicePluginInstance {
+	create(context): LanguageServicePluginInstance {
 		return {
 			provideCompletionItems(document, position, token) {
 				return {
@@ -99,7 +99,7 @@ export const service = {
 			},
 		};
 	},
-} satisfies ServicePlugin;
+} satisfies LanguageServicePlugin;
 ```
 
 ### `resolveCompletionItem`
